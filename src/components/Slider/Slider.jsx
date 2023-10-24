@@ -37,7 +37,7 @@ const Slider = () => {
       >
         <SwiperSlide>
           <div className="relative ">
-            <div className="">
+            <div className="rounded-lg">
               <img
                 src={img1}
                 alt="slider picture 1"
@@ -60,7 +60,7 @@ const Slider = () => {
         </SwiperSlide>
         <SwiperSlide>
           <div className="relative ">
-            <div className="">
+            <div className="rounded-lg">
               <img
                 src={img2}
                 alt="slider picture 1"
@@ -82,7 +82,7 @@ const Slider = () => {
         </SwiperSlide>
         <SwiperSlide>
           <div className="relative ">
-            <div className="">
+            <div className="rounded-lg">
               <img
                 src={img3}
                 alt="slider picture 1"
@@ -104,7 +104,7 @@ const Slider = () => {
         </SwiperSlide>
         <SwiperSlide>
           <div className="relative ">
-            <div className="">
+            <div className="rounded-lg">
               <img
                 src={img4}
                 alt="slider picture 1"
@@ -126,7 +126,7 @@ const Slider = () => {
         </SwiperSlide>
         <SwiperSlide>
           <div className="relative ">
-            <div className="">
+            <div className="rounded-lg">
               <img
                 src={img5}
                 alt="slider picture 1"
@@ -148,7 +148,7 @@ const Slider = () => {
         </SwiperSlide>
         <SwiperSlide>
           <div className="relative ">
-            <div className="">
+            <div className="rounded-lg">
               <img
                 src={img6}
                 alt="slider picture 1"
