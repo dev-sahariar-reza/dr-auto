@@ -6,6 +6,7 @@ import {
   onAuthStateChanged,
   signInWithEmailAndPassword,
   signInWithPopup,
+  signOut,
   updateProfile,
 } from "firebase/auth";
 import { app } from "../firebase/firebase.config";
@@ -44,6 +45,12 @@ const AuthProvider = ({ children }) => {
     return signInWithPopup(auth, googleProvider);
   };
 
+  // logout
+  const logOut = () => {
+    setLoading(true);
+    return signOut(auth);
+  };
+
   // Get the currently signed-in user
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (loggedUser) => {
@@ -62,6 +69,7 @@ const AuthProvider = ({ children }) => {
     updateUserProfile,
     logInWithEmail,
     logInWithGoogle,
+    logOut,
   };
 
   return (
