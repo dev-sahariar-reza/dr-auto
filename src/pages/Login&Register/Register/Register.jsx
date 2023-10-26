@@ -8,8 +8,10 @@ import Swal from "sweetalert2";
 const Register = () => {
   const [control, setControl] = useState(false);
   const [error, setError] = useState("");
-  const { createUser, updateUserProfile } = useContext(AuthContext);
+  const { createUser, updateUserProfile, logInWithGoogle } =
+    useContext(AuthContext);
 
+  // register with email and password function
   const handleRegister = (event) => {
     event.preventDefault();
 
@@ -47,6 +49,21 @@ const Register = () => {
       })
       .catch((error) => {
         const errorMessage = error.message;
+        setError(errorMessage);
+      });
+  };
+
+  // register with google function
+  const handleGoogleRegister = () => {
+    logInWithGoogle()
+      .then((result) => {
+        const loggedUser = result.user;
+        console.log(loggedUser);
+        Swal.fire("Well done!", "You have been registered!", "success");
+      })
+      .catch((error) => {
+        const errorMessage = error.message;
+        console.log(errorMessage);
         setError(errorMessage);
       });
   };
@@ -141,7 +158,10 @@ const Register = () => {
           </p>
 
           <div className="text-center my-6">
-            <button className="btn btn-circle btn-outline">
+            <button
+              className="btn btn-circle btn-outline"
+              onClick={handleGoogleRegister}
+            >
               <FaGoogle />
             </button>
           </div>
