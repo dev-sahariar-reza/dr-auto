@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import image from "../../../assets/login&register/login.svg";
 import { FaGoogle } from "react-icons/fa6";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../provider/AuthProvider";
 import Swal from "sweetalert2";
 
@@ -9,6 +9,11 @@ const Login = () => {
   const [control, setControl] = useState(false);
   const [error, setError] = useState("");
   const { logInWithEmail, logInWithGoogle } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
+  // console.log(location);
+  // console.log(from);
 
   // Login function with email and password
   const handleLogInWithEmail = (event) => {
@@ -26,6 +31,7 @@ const Login = () => {
         console.log(loggedUser);
         Swal.fire("Well done!", "Login successful!", "success");
         form.reset();
+        navigate(from, { replace: true });
       })
       .catch((error) => {
         const errorMessage = error.message;
@@ -41,6 +47,7 @@ const Login = () => {
         const loggedUser = result.user;
         console.log(loggedUser);
         Swal.fire("Well done!", "Login successful!", "success");
+        navigate(from, { replace: true });
       })
       .catch((error) => {
         const errorMessage = error.message;
