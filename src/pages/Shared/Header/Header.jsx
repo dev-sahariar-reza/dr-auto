@@ -30,10 +30,19 @@ const Header = () => {
         </Link>
       </li>
       <li>
-        <Link className="font-semibold text-base lg:text-xl" to="/">
+        <Link className="font-semibold text-base lg:text-xl" to="/contact">
           Contact
         </Link>
       </li>
+      {user ? (
+        <li>
+          <Link className="font-semibold text-base lg:text-xl" to="/bookings">
+            My Bookings
+          </Link>
+        </li>
+      ) : (
+        <></>
+      )}
     </>
   );
 

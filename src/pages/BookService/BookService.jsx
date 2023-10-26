@@ -1,9 +1,12 @@
+import { useContext } from "react";
 import { useLoaderData } from "react-router-dom";
 import Swal from "sweetalert2";
+import { AuthContext } from "../../provider/AuthProvider";
 
 const BookService = () => {
   const service = useLoaderData();
   const { title, img, price } = service;
+  const { user } = useContext(AuthContext);
 
   const handleBookService = (event) => {
     event.preventDefault();
@@ -65,7 +68,7 @@ const BookService = () => {
             <input
               type="text"
               className="input input-bordered w-full"
-              placeholder="Enter your Name"
+              defaultValue={user?.displayName}
               name="name"
             />
           </div>
@@ -76,7 +79,7 @@ const BookService = () => {
             <input
               type="email"
               className="input input-bordered w-full"
-              placeholder="Enter your email address"
+              defaultValue={user?.email}
               name="email"
             />
           </div>
