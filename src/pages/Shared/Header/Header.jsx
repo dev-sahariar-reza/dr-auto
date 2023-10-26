@@ -74,12 +74,12 @@ const Header = () => {
         <div className="navbar-end">
           {user ? (
             <div className="flex justify-between items-center">
-              <div className="avatar online">
-                <div className="w-24 rounded-full">
+              <div className="avatar online mr-4">
+                <div className="w-12 rounded-full">
                   <img src={user?.photoURL} />
                 </div>
               </div>
-              <h3 className="font-bold text-xl">{user?.displayName}</h3>
+              <h3 className="font-bold text-xl mr-4">{user?.displayName}</h3>
               <button className="btn btn-accent">Log out</button>
             </div>
           ) : (
