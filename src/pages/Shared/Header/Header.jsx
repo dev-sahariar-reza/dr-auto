@@ -1,6 +1,9 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../../provider/AuthProvider";
 
 const Header = () => {
+  const { user } = useContext(AuthContext);
   const navItem = (
     <>
       <li>
@@ -69,7 +72,21 @@ const Header = () => {
           <ul className="menu menu-horizontal px-1">{navItem}</ul>
         </div>
         <div className="navbar-end">
-          <a className="btn btn-outline btn-secondary">Appointment</a>
+          {user ? (
+            <div className="flex justify-between items-center">
+              <div className="avatar online">
+                <div className="w-24 rounded-full">
+                  <img src={user?.photoURL} />
+                </div>
+              </div>
+              <h3 className="font-bold text-xl">{user?.displayName}</h3>
+              <button className="btn btn-accent">Log out</button>
+            </div>
+          ) : (
+            <Link to="/login">
+              <button className="btn btn-accent">Log in</button>
+            </Link>
+          )}
         </div>
       </div>
     </header>

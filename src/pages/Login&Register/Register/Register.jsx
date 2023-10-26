@@ -8,7 +8,7 @@ import Swal from "sweetalert2";
 const Register = () => {
   const [control, setControl] = useState(false);
   const [error, setError] = useState("");
-  const { register } = useContext(AuthContext);
+  const { createUser, updateUserProfile } = useContext(AuthContext);
 
   const handleRegister = (event) => {
     event.preventDefault();
@@ -19,13 +19,11 @@ const Register = () => {
     const email = form.email.value;
     const password = form.password.value;
 
-    // console.log(name, photo, email, password);
+    // validate
 
-    if (name.length || photo.length || email.length || password.length < 1) {
-      Swal.fire("Error!", "Please enter all required information", "error");
-      return;
-    } else if (!/(?=.*[A-Z])/.test(password)) {
+    if (!/(?=.*[A-Z])/.test(password)) {
       setError("Please Add at least one upper Case");
+      return;
     } else if (!/(?=.*[0-9])/.test(password)) {
       setError("Please Add at least one Number");
       return;
@@ -39,11 +37,17 @@ const Register = () => {
 
     setError("");
 
-    register(email, password).then((result) => {
-      const createdUser = result.user;
-      Swal.fire("Well Done!", "You have been registered!", "success");
-      form.reset();
-    });
+    createUser(email, password)
+      .then((result) => {
+        const createdUser = result.user;
+        updateUserProfile(name, photo);
+        Swal.fire("Well done!", "You have been registered!", "success");
+        form.reset();
+      })
+      .catch((error) => {
+        const errorMessage = error.message;
+        setError(errorMessage);
+      });
   };
 
   return (
