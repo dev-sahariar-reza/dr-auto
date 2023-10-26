@@ -1,11 +1,51 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import image from "../../../assets/login&register/login.svg";
 import { FaGoogle } from "react-icons/fa6";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../../provider/AuthProvider";
+import Swal from "sweetalert2";
 
 const Register = () => {
   const [control, setControl] = useState(false);
   const [error, setError] = useState("");
+  const { register } = useContext(AuthContext);
+
+  const handleRegister = (event) => {
+    event.preventDefault();
+
+    const form = event.target;
+    const name = form.name.value;
+    const photo = form.photo.value;
+    const email = form.email.value;
+    const password = form.password.value;
+
+    // console.log(name, photo, email, password);
+
+    if (name.length || photo.length || email.length || password.length < 1) {
+      Swal.fire("Error!", "Please enter all required information", "error");
+      return;
+    } else if (!/(?=.*[A-Z])/.test(password)) {
+      setError("Please Add at least one upper Case");
+    } else if (!/(?=.*[0-9])/.test(password)) {
+      setError("Please Add at least one Number");
+      return;
+    } else if (!/(?=.*[!@#$&*])/.test(password)) {
+      setError("Please Add at least one special character !@#$&*");
+      return;
+    } else if (password.length < 6) {
+      setError("Please use at least 6 character");
+      return;
+    }
+
+    setError("");
+
+    register(email, password).then((result) => {
+      const createdUser = result.user;
+      Swal.fire("Well Done!", "You have been registered!", "success");
+      form.reset();
+    });
+  };
+
   return (
     <section className="container mx-auto my-10">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 lg:gap-10 justify-center items-center">
@@ -16,7 +56,7 @@ const Register = () => {
         <div className="p-14 border-2">
           <h1 className="text-3xl font-bold text-center">Register Page</h1>
 
-          <form>
+          <form onSubmit={handleRegister}>
             <div className="form-control w-full mb-6">
               <label className="label">
                 <span className="label-text text-base font-bold">Name</span>
@@ -92,7 +132,7 @@ const Register = () => {
           </form>
 
           <p className="text-xl text-center font-semibold my-6">
-            Or Sign in With
+            Or Register in With
           </p>
 
           <div className="text-center my-6">

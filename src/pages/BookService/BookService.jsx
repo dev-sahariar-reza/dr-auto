@@ -1,4 +1,5 @@
 import { useLoaderData } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const BookService = () => {
   const service = useLoaderData();
@@ -22,7 +23,7 @@ const BookService = () => {
       img,
     };
 
-    console.log(booking);
+    // console.log(booking);
 
     fetch("http://localhost:5000/bookings", {
       method: "POST",
@@ -33,7 +34,10 @@ const BookService = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        // console.log(data);
+        if (data.insertedId) {
+          Swal.fire("Successful!", "You booked the service!", "success");
+        }
       });
   };
 
