@@ -8,7 +8,7 @@ import Swal from "sweetalert2";
 const Login = () => {
   const [control, setControl] = useState(false);
   const [error, setError] = useState("");
-  const { logInWithEmail } = useContext(AuthContext);
+  const { logInWithEmail, logInWithGoogle } = useContext(AuthContext);
 
   // Login function with email and password
   const handleLogInWithEmail = (event) => {
@@ -26,6 +26,21 @@ const Login = () => {
         console.log(loggedUser);
         Swal.fire("Well done!", "Login successful!", "success");
         form.reset();
+      })
+      .catch((error) => {
+        const errorMessage = error.message;
+        console.log(errorMessage);
+        setError(errorMessage);
+      });
+  };
+
+  // login with google function
+  const handleGoogleLogin = () => {
+    logInWithGoogle()
+      .then((result) => {
+        const loggedUser = result.user;
+        console.log(loggedUser);
+        Swal.fire("Well done!", "Login successful!", "success");
       })
       .catch((error) => {
         const errorMessage = error.message;
@@ -102,7 +117,10 @@ const Login = () => {
           </p>
 
           <div className="text-center my-6">
-            <button className="btn btn-circle btn-outline">
+            <button
+              className="btn btn-circle btn-outline"
+              onClick={handleGoogleLogin}
+            >
               <FaGoogle />
             </button>
           </div>
