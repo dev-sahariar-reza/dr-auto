@@ -149,7 +149,7 @@ const ServiceDetails = () => {
 
           <h3 className="text-4xl font-bold mb-8">Price: ${price}</h3>
 
-          <Link to={`/checkout/${_id}`}>
+          <Link to={`/book/${_id}`}>
             <button className="btn btn-secondary btn-block font-bold">
               CheckOut
             </button>
