@@ -1,11 +1,38 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import image from "../../../assets/login&register/login.svg";
 import { FaGoogle } from "react-icons/fa6";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../../provider/AuthProvider";
+import Swal from "sweetalert2";
 
 const Login = () => {
   const [control, setControl] = useState(false);
   const [error, setError] = useState("");
+  const { logInWithEmail } = useContext(AuthContext);
+
+  // Login function with email and password
+  const handleLogInWithEmail = (event) => {
+    event.preventDefault();
+
+    const form = event.target;
+    const email = form.email.value;
+    const password = form.password.value;
+
+    setError("");
+
+    logInWithEmail(email, password)
+      .then((result) => {
+        const loggedUser = result.user;
+        console.log(loggedUser);
+        Swal.fire("Well done!", "Login successful!", "success");
+        form.reset();
+      })
+      .catch((error) => {
+        const errorMessage = error.message;
+        console.log(errorMessage);
+        setError(errorMessage);
+      });
+  };
 
   return (
     <section className="container mx-auto my-10">
@@ -17,7 +44,7 @@ const Login = () => {
         <div className="p-14 border-2">
           <h1 className="text-3xl font-bold text-center">Login Page</h1>
 
-          <form>
+          <form onSubmit={handleLogInWithEmail}>
             <div className="form-control w-full mb-6">
               <label className="label">
                 <span className="label-text text-base font-bold">Email</span>

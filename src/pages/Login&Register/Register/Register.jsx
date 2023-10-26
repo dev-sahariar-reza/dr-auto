@@ -27,7 +27,7 @@ const Register = () => {
     } else if (!/(?=.*[0-9])/.test(password)) {
       setError("Please Add at least one Number");
       return;
-    } else if (!/(?=.*[!@#$&*])/.test(password)) {
+    } else if (!/(?=.*[!@#$&*.])/.test(password)) {
       setError("Please Add at least one special character !@#$&*");
       return;
     } else if (password.length < 6) {
@@ -40,6 +40,7 @@ const Register = () => {
     createUser(email, password)
       .then((result) => {
         const createdUser = result.user;
+        console.log(createdUser);
         updateUserProfile(name, photo);
         Swal.fire("Well done!", "You have been registered!", "success");
         form.reset();

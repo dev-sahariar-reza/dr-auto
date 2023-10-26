@@ -2,6 +2,7 @@ import { createContext, useState } from "react";
 import {
   createUserWithEmailAndPassword,
   getAuth,
+  signInWithEmailAndPassword,
   updateProfile,
 } from "firebase/auth";
 import { app } from "../firebase/firebase.config";
@@ -26,11 +27,17 @@ const AuthProvider = ({ children }) => {
     });
   };
 
+  // login with email and password
+  const logInWithEmail = (email, password) => {
+    return signInWithEmailAndPassword(auth, email, password);
+  };
+
   const authInfo = {
     user,
     loading,
     createUser,
     updateUserProfile,
+    logInWithEmail,
   };
 
   return (
