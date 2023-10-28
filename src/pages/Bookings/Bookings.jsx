@@ -14,7 +14,7 @@ const Bookings = () => {
         // console.log(data);
         setBookings(data);
       });
-  }, []);
+  }, [url]);
 
   // delete a booking data function
   const handleDelete = (id) => {
@@ -46,6 +46,45 @@ const Bookings = () => {
       }
     });
   };
+  const handleBookingConfirm = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, confirm it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(`http://localhost:5000/bookings/${id}`, {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ status: "confirm" }),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            if (data.modifiedCount > 0) {
+              const remaining = bookings.filter(
+                (booking) => booking._id !== id
+              );
+              const updated = bookings.find((booking) => booking._id === id);
+              updated.status = "Confirm";
+              const newBookings = [updated, ...remaining];
+              setBookings(newBookings);
+              Swal.fire(
+                "Updated!",
+                "Your booking is confirmed now.",
+                "success"
+              );
+            }
+          });
+      }
+    });
+  };
 
   return (
     <section className="container mx-auto my-12">
@@ -68,6 +107,7 @@ const Bookings = () => {
                 key={booking._id}
                 booking={booking}
                 handleDelete={handleDelete}
+                handleBookingConfirm={handleBookingConfirm}
               />
             ))}
           </tbody>
