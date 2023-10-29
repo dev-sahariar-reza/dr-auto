@@ -1,5 +1,6 @@
 import Slider from "../../../components/Slider/Slider";
 import About from "../About/About";
+import BrowseProducts from "../BrowseProducts/BrowseProducts";
 import Schedule from "../Schedule/Schedule";
 import Service from "../Service/Service";
 
@@ -10,6 +11,7 @@ const Home = () => {
       <About />
       <Service />
       <Schedule />
+      <BrowseProducts />
     </>
   );
 };
