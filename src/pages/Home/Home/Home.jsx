@@ -1,5 +1,6 @@
 import Slider from "../../../components/Slider/Slider";
 import About from "../About/About";
+import Schedule from "../Schedule/Schedule";
 import Service from "../Service/Service";
 
 const Home = () => {
@@ -8,6 +9,7 @@ const Home = () => {
       <Slider />
       <About />
       <Service />
+      <Schedule />
     </>
   );
 };

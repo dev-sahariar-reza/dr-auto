@@ -8,14 +8,18 @@ const About = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5 justify-center items-center">
         <div className="relative">
-          <img src={image1} alt="" className="w-[460px] h-[475px] rounded-xl" />
+          <img
+            src={image1}
+            alt=""
+            className="w-1/2 lg:w-[460px] h-1/2 lg:h-[475px] rounded-xl"
+          />
           <img
             src={image2}
             alt=""
-            className="w-[327px] h-[332px] border-[10px] border-white rounded-xl absolute top-48 left-52"
+            className="w-1/2 lg:w-[327px] h-1/2: lg:h-[332px] border-[10px] border-white rounded-xl absolute top-16 lg:top-48 left-16 lg:left-52"
           />
         </div>
-        <div>
+        <div className="pt-24">
           <h1 className="text-3xl font-extrabold mb-1">We are qualified </h1>
           <h1 className="text-3xl font-extrabold mb-1">& of experience</h1>
           <h1 className="text-3xl font-extrabold mb-1">in this field</h1>
