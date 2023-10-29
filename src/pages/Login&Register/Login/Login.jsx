@@ -27,11 +27,26 @@ const Login = () => {
 
     logInWithEmail(email, password)
       .then((result) => {
-        const loggedUser = result.user;
-        console.log(loggedUser);
-        Swal.fire("Well done!", "Login successful!", "success");
-        form.reset();
-        navigate(from, { replace: true });
+        const user = result.user;
+        const loggedUser = {
+          email: user.email,
+        };
+        fetch("http://localhost:5000/jwt", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(loggedUser),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            // now i am storing the token in local storage but it is not best practice for real standard projects
+            console.log(data);
+            localStorage.setItem("dr-auto-access-token", data.token);
+            Swal.fire("Well done!", "Login successful!", "success");
+            form.reset();
+            navigate(from, { replace: true });
+          });
       })
       .catch((error) => {
         const errorMessage = error.message;
@@ -44,10 +59,25 @@ const Login = () => {
   const handleGoogleLogin = () => {
     logInWithGoogle()
       .then((result) => {
-        const loggedUser = result.user;
-        console.log(loggedUser);
-        Swal.fire("Well done!", "Login successful!", "success");
-        navigate(from, { replace: true });
+        const user = result.user;
+        const loggedUser = {
+          email: user.email,
+        };
+        fetch("http://localhost:5000/jwt", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(loggedUser),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            // now i am storing the token in local storage but it is not best practice for real standard projects
+            console.log(data);
+            localStorage.setItem("dr-auto-access-token", data.token);
+            Swal.fire("Well done!", "Login successful!", "success");
+            navigate(from, { replace: true });
+          });
       })
       .catch((error) => {
         const errorMessage = error.message;

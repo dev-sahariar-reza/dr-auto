@@ -50,6 +50,7 @@ const Header = () => {
   const handleLogOut = () => {
     logOut()
       .then(() => {
+        localStorage.removeItem("dr-auto-access-token");
         Swal.fire("Successful!", "You logged out!", "success");
       })
       .catch((error) => console.log(error.message));
