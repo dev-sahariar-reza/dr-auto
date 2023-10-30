@@ -11,7 +11,7 @@ const BrowseProducts = () => {
       <h1 className="text-center text-3xl font-bold mb-5">
         Browse Our Products
       </h1>
-      <p className="mt-5 mb-10 mx-auto text-center">
+      <p className="mt-5 mb-10 mx-auto text-center w-1/2">
         the majority have suffered alteration in some form, by injected humour,
         or randomised words which don't look even slightly believable.{" "}
       </p>
@@ -259,6 +259,9 @@ const BrowseProducts = () => {
             <p>$20.00</p>
           </div>
         </div>
+      </div>
+      <div className="text-center my-6">
+        <button className="btn btn-secondary">View More</button>
       </div>
     </section>
   );
