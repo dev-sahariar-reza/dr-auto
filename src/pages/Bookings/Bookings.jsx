@@ -9,7 +9,7 @@ const Bookings = () => {
   const [bookings, setBookings] = useState([]);
   const navigate = useNavigate();
 
-  const url = `http://localhost:5000/bookings?email=${user?.email}`;
+  const url = `https://dr-auto-server-gbfvaf9px-developer-sahariar-reza.vercel.app/bookings?email=${user?.email}`;
   useEffect(() => {
     fetch(url, {
       method: "GET",
@@ -39,9 +39,12 @@ const Bookings = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/bookings/${id}`, {
-          method: "DELETE",
-        })
+        fetch(
+          `https://dr-auto-server-gbfvaf9px-developer-sahariar-reza.vercel.app/bookings/${id}`,
+          {
+            method: "DELETE",
+          }
+        )
           .then((res) => res.json())
           .then((data) => {
             if (data.deletedCount > 0) {
@@ -68,13 +71,16 @@ const Bookings = () => {
       confirmButtonText: "Yes, confirm it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/bookings/${id}`, {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ status: "confirm" }),
-        })
+        fetch(
+          `https://dr-auto-server-gbfvaf9px-developer-sahariar-reza.vercel.app/bookings/${id}`,
+          {
+            method: "PATCH",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ status: "confirm" }),
+          }
+        )
           .then((res) => res.json())
           .then((data) => {
             console.log(data);

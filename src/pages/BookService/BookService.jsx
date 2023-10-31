@@ -28,13 +28,16 @@ const BookService = () => {
 
     // console.log(booking);
 
-    fetch("http://localhost:5000/bookings", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(booking),
-    })
+    fetch(
+      "https://dr-auto-server-gbfvaf9px-developer-sahariar-reza.vercel.app/bookings",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(booking),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         // console.log(data);

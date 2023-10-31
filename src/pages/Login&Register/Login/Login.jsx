@@ -31,13 +31,16 @@ const Login = () => {
         const loggedUser = {
           email: user.email,
         };
-        fetch("http://localhost:5000/jwt", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(loggedUser),
-        })
+        fetch(
+          "https://dr-auto-server-gbfvaf9px-developer-sahariar-reza.vercel.app/jwt",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(loggedUser),
+          }
+        )
           .then((res) => res.json())
           .then((data) => {
             // now i am storing the token in local storage but it is not best practice for real standard projects
@@ -63,13 +66,16 @@ const Login = () => {
         const loggedUser = {
           email: user.email,
         };
-        fetch("http://localhost:5000/jwt", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(loggedUser),
-        })
+        fetch(
+          "https://dr-auto-server-gbfvaf9px-developer-sahariar-reza.vercel.app/jwt",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(loggedUser),
+          }
+        )
           .then((res) => res.json())
           .then((data) => {
             // now i am storing the token in local storage but it is not best practice for real standard projects
